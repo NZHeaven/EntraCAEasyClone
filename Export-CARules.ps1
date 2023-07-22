@@ -1,4 +1,4 @@
-function Export-MFARules {
+function Export-CARules {
     param(
         [Parameter(Mandatory = $true)]
         $path,
@@ -39,4 +39,4 @@ function ExportCAPolicy {
 }
 
 
-Export-MFARules -path "/Users/joshb/Documents/Projects/MFA_Clone_Module/Policies/" -ConditionalAccessPolicyIds "aa018f6a-881a-4cfa-bb1a-70b986170521","de23c439-668e-4be2-a156-9513900b0939"
+Export-CARules -path "/Users/joshb/Documents/Projects/MFA_Clone_Module/Policies/" -ConditionalAccessPolicyIds "aa018f6a-881a-4cfa-bb1a-70b986170521","de23c439-668e-4be2-a156-9513900b0939"
