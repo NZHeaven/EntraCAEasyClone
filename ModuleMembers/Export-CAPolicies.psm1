@@ -45,7 +45,6 @@ function SanatisePolicy {
             "Id" = $policy.grantControls.authenticationStrength.Id
         }
     }
-     $policy.DisplayName = "Test: " + $policy.DisplayName
     #Override the State and Set to Report Only
     $policy.State = "enabledForReportingButNotEnforced"
     return $policy
@@ -62,5 +61,4 @@ function ExportCAPolicy {
     Write-Host " - Exported $($Policy.DisplayName) -> $destination"
 }
 
-
-Export-CAPolicies -path "/Users/joshb/Documents/Projects/EntraCAEasyClone/Policies/" 
+Export-ModuleMember Export-CAPolicies
