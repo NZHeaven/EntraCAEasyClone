@@ -10,7 +10,46 @@ You first must auth with the below command, this will authenticate you with the 
 - Connect-MgGraph -Scopes "Application.Read.All", "Policy.Read.All", "Policy.ReadWrite.ConditionalAccess"
 
 ---
-### Import-CAPolicies
+### Module Member: Export-CAPolicies
+#### Description
+The Export-CAPolicies PowerShell module function is designed to export Conditional Access Policies from Microsoft 365 to JSON files. This function simplifies the process of exporting policies and prepares the policies for future importing using the Import-CAPolicies function.
+
+#### Prerequisites
+Before using the Export-CAPolicies function, ensure you have the following:
+
+- A valid Microsoft 365 tenant with the necessary permissions to manage Conditional Access Policies.
+- PowerShell with the required modules and permissions (MG-Graph)
+
+#### Cmdlet Usage
+```
+Export-CAPolicies -path <string> [-ConditionalAccessPolicyIds <array>]
+```
+
+#### Parameters
+##### -path (Mandatory)
+Specifies the path where the JSON policy files will be saved. The function will use this directory to store the exported policies as separate JSON files.
+
+##### -ConditionalAccessPolicyIds (Optional)
+An array of specific Conditional Access Policy IDs that you want to export. If specified, only the policies with the matching IDs will be exported. If not specified, all policies will be fetched and exported.
+
+#### Examples
+Export all policies to the "C:\ExportedPolicies" directory:
+```
+Export-CAPolicies -path "C:\ExportedPolicies\"
+```
+Export specific policies with IDs "PolicyId1" and "PolicyId2" to the "C:\ExportedPolicies" directory:
+```
+Export-CAPolicies -path "C:\ExportedPolicies\" -ConditionalAccessPolicyIds @("PolicyId1", "PolicyId2")
+```
+
+#### Note
+- The function uses the Microsoft Graph API to fetch the policies, so ensure you have the necessary permissions and valid authentication to perform these operations.
+- The exported JSON files can be used as input for the Import-CAPolicies function to import the policies back into your Microsoft 365 environment.
+- Be cautious while exporting and importing policies, as they may have significant implications on the security and access controls of your Microsoft 365 environment. Always review the policies before importing or exporting.
+- For more information about Microsoft 365 Conditional Access Policies, refer to the official documentation and Microsoft Graph API reference.
+---
+
+### Module Member: Import-CAPolicies
 #### Description
 The Import-CAPolicies PowerShell module function is designed to simplify the process of importing Conditional Access Policies into Microsoft 365. This function allows you to import policies from JSON files and perform checks to avoid duplicate policy names. It uses Microsoft Graph API to add the policies to the target environment.
 
@@ -38,3 +77,9 @@ Import only specific policies (Policy1 and Policy2) from the "C:\Policies" direc
 ```
 Import-CAPolicies -path "C:\Policies" -Policies @("Policy1.json", "Policy2.json") -ignoreChecks $true
 ```
+
+#### Note
+- By Design the Module will override the state and set it to Report. This is to stop accidental lock outs.
+- The function uses the Microsoft Graph API to add the policies, so ensure you have the necessary permissions and valid authentication to perform these operations.
+- Be cautious while importing policies, as they may have significant implications on the security and access controls of your Microsoft 365 environment. Always review the policies before importing.
+- For more information about Microsoft 365 Conditional Access Policies, refer to the official documentation and Microsoft Graph API reference.
