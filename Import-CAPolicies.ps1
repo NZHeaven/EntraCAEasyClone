@@ -26,7 +26,7 @@ function Import-CAPolicies{
     }else{
         Write-Host "Importing All Policies - Found $($JsonFiles.Length) json files - Attempting to Import" -ForegroundColor Green
         foreach($jfile in $JsonFiles){
-            Write-Host "- Located Policy: $($jfile.Name) (Importing)"
+            Write-Host "- Located Policy: $($jfile.Name) (Importing)" -ForegroundColor Green
             $json = Get-Content $jfile
             $json = SanatiseJson -json $json
             Add-CAPolicy -Json $json

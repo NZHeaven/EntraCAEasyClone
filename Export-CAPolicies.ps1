@@ -40,12 +40,12 @@ function SanatisePolicy {
     $policy.modifiedDateTime = $null;
 
     #Clean Authentication Strength, only needs to contain the ID
-    if($policy.grantControls.authenticationStrength){
+    if($policy.grantControls.authenticationStrength.Id){
         $policy.grantControls.AuthenticationStrength = @{
             "Id" = $policy.grantControls.authenticationStrength.Id
         }
     }
-
+     $policy.DisplayName = "Test: " + $policy.DisplayName
     #Override the State and Set to Report Only
     $policy.State = "enabledForReportingButNotEnforced"
     return $policy
@@ -63,4 +63,4 @@ function ExportCAPolicy {
 }
 
 
-Export-CAPolicies -path "/Users/joshb/Documents/Projects/EntraCAEasyClone/Policies/" -ConditionalAccessPolicyIds "1f7bdbb4-836f-480e-91c4-a24e684dc34a"
+Export-CAPolicies -path "/Users/joshb/Documents/Projects/EntraCAEasyClone/Policies/" 
