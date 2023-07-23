@@ -1,5 +1,5 @@
 # EntraCAEasyClone
-Small Powershell Module to Export and Import CA Policies between tenants
+Small Powershell Module to Export and Import CA Policies
 
 Requires Microsoft Graph PowerShell SDK (v1.0)
 Install Instructions: https://learn.microsoft.com/en-us/powershell/microsoftgraph/installation?view=graph-powershell-1.0
