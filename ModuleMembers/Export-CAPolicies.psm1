@@ -61,5 +61,4 @@ function ExportCAPolicy {
     Write-Host " - Exported $($Policy.DisplayName) -> $destination"
 }
 
-
-Export-CAPolicies -path "/Users/joshb/Documents/Projects/EntraCAEasyClone/Policies/" 
+Export-ModuleMember Export-CAPolicies
