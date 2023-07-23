@@ -20,13 +20,13 @@ Import-CAPolicies -path <string> [-Policies <array>] [-ignoreChecks <bool>]
 ```
 
 #### Parameters
--path (Mandatory)
+##### -path (Mandatory)
 Specifies the path where the JSON policy files are located. The function will search for files with the .json extension in this directory.
 
--Policies (Optional)
+##### -Policies (Optional)
 An array of file names that you want to import. If specified, only the policies with matching names will be imported. If not specified, all policies found in the provided path will be imported.
 
--ignoreChecks (Optional)
+##### -ignoreChecks (Optional)
 By default, the function performs checks to avoid importing policies with duplicate names. Set this flag to $true if you want to skip the checks and import policies without any validation.
 
 #### Examples
