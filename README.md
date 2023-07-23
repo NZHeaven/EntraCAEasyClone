@@ -4,7 +4,7 @@ Small Powershell Module to Export and Import Conditional Access Policies from Mi
 ---
 ### Installation
 - Donload the latest release or clone the repo.
-- Open powershell and navigate to the root folder. And run the below command to import the module
+- Open powershell and navigate to the root folder. Run the below command to import the module into scope
 ```
 Import-Module .\EntraCAEasyClone.psd1
 ```
