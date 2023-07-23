@@ -1,4 +1,4 @@
-function Export-CARules {
+function Export-CAPolicies {
     param(
         [Parameter(Mandatory = $true)]
         $path,
@@ -11,7 +11,7 @@ function Export-CARules {
         exit
     }
 
-    #If Policy IDs is specified, export the specific policies otherwise get and export all polcieic
+    #If Policy IDs is specified, export the specific policies otherwise get and export all policies
     if ($ConditionalAccessPolicyIds) {
         Write-Host "Exporting Specified Policies - Supplied: $($ConditionalAccessPolicyIds.length)" -ForegroundColor Green
         foreach ($Id in $ConditionalAccessPolicyIds) {
@@ -28,15 +28,39 @@ function Export-CARules {
         }
     }
 }
+
+#This function helps the import function by recreating some of the controls/sessions that need to be cleaned in order to be able to create the policy
+function SanatisePolicy {
+    param(
+        $policy
+    )
+    #Remove ID, Created time and Modified Time
+    $policy.Id = $null;
+    $policy.createdDateTime = $null;
+    $policy.modifiedDateTime = $null;
+
+    #Clean Authentication Strength, only needs to contain the ID
+    if($policy.grantControls.authenticationStrength){
+        $policy.grantControls.AuthenticationStrength = @{
+            "Id" = $policy.grantControls.authenticationStrength.Id
+        }
+    }
+
+    #Override the State and Set to Report Only
+    $policy.State = "enabledForReportingButNotEnforced"
+    return $policy
+}
+
 function ExportCAPolicy {
     param(
         $policy,
         $path
     )
     $destination = $path + $policy.Id + ".json"
-    ConvertTo-Json $policy -Depth 100 | Out-File $destination
+    $policy = SanatisePolicy -policy $policy
+    $policy.ToJsonString() | Out-File $destination
     Write-Host " - Exported $($Policy.DisplayName) -> $destination"
 }
 
 
-Export-CARules -path "/Users/joshb/Documents/Projects/MFA_Clone_Module/Policies/" -ConditionalAccessPolicyIds "aa018f6a-881a-4cfa-bb1a-70b986170521","de23c439-668e-4be2-a156-9513900b0939"
+Export-CAPolicies -path "/Users/joshb/Documents/Projects/EntraCAEasyClone/Policies/" -ConditionalAccessPolicyIds "1f7bdbb4-836f-480e-91c4-a24e684dc34a"

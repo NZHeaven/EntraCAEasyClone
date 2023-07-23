@@ -1,0 +1,40 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies/$entity",
+  "id": "",
+  "displayName": "Grant Access: Azure Join Devices",
+  "state": "enabledForReportingButNotEnforced",
+  "conditions": {
+    "clientAppTypes": [ "mobileAppsAndDesktopClients" ],
+    "servicePrincipalRiskLevels": [ ],
+    "signInRiskLevels": [ ],
+    "userRiskLevels": [ ],
+    "applications": {
+      "excludeApplications": [ ],
+      "includeApplications": [ "0000000a-0000-0000-c000-000000000000", "d4ebce55-015a-49b5-a083-c84d1797ae8c" ],
+      "includeAuthenticationContextClassReferences": [ ],
+      "includeUserActions": [ ]
+    },
+    "locations": {
+      "excludeLocations": [ ],
+      "includeLocations": [ "0439590f-a3ad-4fad-9c91-214fefeb1e8e" ]
+    },
+    "users": {
+      "excludeGroups": [ ],
+      "excludeRoles": [ ],
+      "excludeUsers": [ ],
+      "includeGroups": [ ],
+      "includeRoles": [ ],
+      "includeUsers": [ "All" ]
+    }
+  },
+  "grantControls": {
+    "authenticationStrength@odata.context": "https://graph.microsoft.com/v1.0/$metadata#identity/conditionalAccess/policies(\u00271f7bdbb4-836f-480e-91c4-a24e684dc34a\u0027)/grantControls/authenticationStrength/$entity",
+    "builtInControls": [ ],
+    "customAuthenticationFactors": [ ],
+    "operator": "OR",
+    "termsOfUse": [ ],
+    "authenticationStrength": {
+      "id": "b3663555-d9f8-43f7-ab92-d0e6550298c4"
+    }
+  }
+}
