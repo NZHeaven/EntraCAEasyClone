@@ -45,7 +45,6 @@ function SanatisePolicy {
             "Id" = $policy.grantControls.authenticationStrength.Id
         }
     }
-     $policy.DisplayName = "Test: " + $policy.DisplayName
     #Override the State and Set to Report Only
     $policy.State = "enabledForReportingButNotEnforced"
     return $policy
