@@ -1,18 +1,21 @@
 # EntraCAEasyClone
-Small Powershell Module to Export and Import CA Policies
-
-Requires Microsoft Graph PowerShell SDK (v1.0)
-Install Instructions: https://learn.microsoft.com/en-us/powershell/microsoftgraph/installation?view=graph-powershell-1.0
+Small Powershell Module to Export and Import Conditional Access Policies from Microsoft Entra.
 
 ---
-
-You first must auth with the below command, this will authenticate you with the MS Graph with the required scopes
-- Connect-MgGraph -Scopes "Application.Read.All", "Policy.Read.All", "Policy.ReadWrite.ConditionalAccess"
-
+### Installation
+- Donload the latest release or clone the repo.
+- Open powershell and navigate to the root folder. And run the below command to import the module
+```
+Import-Module .\EntraCAEasyClone.psd1
+```
+**NOTE:** You first must auth with the below command, this will authenticate you with the MS Graph with the required scopes
+```
+Connect-MgGraph -Scopes "Application.Read.All", "Policy.Read.All", "Policy.ReadWrite.ConditionalAccess"
+```
 ---
 ### Module Member: Export-CAPolicies
 #### Description
-The Export-CAPolicies PowerShell module function is designed to export Conditional Access Policies from Microsoft 365 to JSON files. This function simplifies the process of exporting policies and prepares the policies for future importing using the Import-CAPolicies function.
+The Export-CAPolicies PowerShell module function exports Conditional Access Policies from Microsoft 365 to JSON files. It will sanatise the Json ready to be imported by Import-CAPolicies
 
 #### Prerequisites
 Before using the Export-CAPolicies function, ensure you have the following:
@@ -51,7 +54,7 @@ Export-CAPolicies -path "C:\ExportedPolicies\" -ConditionalAccessPolicyIds @("Po
 
 ### Module Member: Import-CAPolicies
 #### Description
-The Import-CAPolicies PowerShell module function is designed to simplify the process of importing Conditional Access Policies into Microsoft 365. This function allows you to import policies from JSON files and perform checks to avoid duplicate policy names. It uses Microsoft Graph API to add the policies to the target environment.
+This function allows you to import policies from JSON files and by default will perform checks to avoid duplicate policys getting created.
 
 Cmdlet Usage
 ```
