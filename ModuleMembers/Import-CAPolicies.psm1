@@ -26,7 +26,7 @@ function Import-CAPolicies{
         foreach($jfile in $JsonFiles){
             if($Policies -contains $jfile.Name){
                 Write-Host "- Located Policy: $($jfile.Name) (Importing)"
-                $json = Get-Content $jfile
+                $json = Get-Content $jfile.fullname
                 if(performChecksAndContinue -json $json -currentPolicies $currentPolicies){
                     Add-CAPolicy -Json $json
                 }
@@ -36,7 +36,7 @@ function Import-CAPolicies{
         Write-Host "Importing All Policies - Found $($JsonFiles.Length) json files - Attempting to Import" -ForegroundColor Green
         foreach($jfile in $JsonFiles){
             Write-Host "- Located Policy: $($jfile.Name) (Importing)" -ForegroundColor Green
-            $json = Get-Content $jfile
+            $json = Get-Content $jfile.fullname
             if(performChecksAndContinue -json $json -currentPolicies $currentPolicies){
                 Add-CAPolicy -Json $json
             }
